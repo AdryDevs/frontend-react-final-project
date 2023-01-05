@@ -21,7 +21,7 @@ const RegisterComponent = () => {
                                 </div>
                                 <div class="col-xl-6">
                                     <div class="card-body p-md-5 text-black">
-                                        <h3 class="mb-5 text-uppercase">Student registration form</h3>
+                                        <h3 class="mb-5 text-uppercase">Registration Form</h3>
 
                                         <div class="row">
                                             <div class="col-md-6 mb-4">
