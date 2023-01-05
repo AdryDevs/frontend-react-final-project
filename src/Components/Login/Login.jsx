@@ -1,5 +1,6 @@
 
-import React from 'react';
+
+import React, { useState } from 'react';
 import {
   MDBBtn,
   MDBContainer,
@@ -11,8 +12,68 @@ import {
   MDBIcon
 }
 from 'mdb-react-ui-kit';
+import { useNavigate } from 'react-router-dom';
+import { useUserToggleContext } from '../../UserProvider';
+import axios from 'axios';
 
-function LoginComponent() {
+const LoginComponent = () => {
+  
+  const navigate = useNavigate();
+  const [form, setForm] = useState({
+    email: '',
+    password: ''
+  });
+  const [error, setError] = useState({});
+  const setField = (field, value) => {
+    setForm({
+      ...form,
+      [field]: value
+    });
+    if (!!error[field]) setError({
+      ...error,
+      [field]: null
+    });
+  };
+  // Validate form
+  const validateForm = () => {
+    const { email, password } = form;
+    setError({
+      email: !email ? 'Email is required' : null,
+      password: !password ? 'Password is required' : null
+    });
+
+    return !email || !password;
+  };
+  // Login
+  const changeLogin = useUserToggleContext();
+  
+  // Form data is sent to the backend to be validated against the database and if it's valid, the user is logged in, otherwise an error is displayed.
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newError = {};
+    const formErrors = validateForm();
+    if (Object.keys(formErrors).length > 0) {
+      setError(formErrors);
+      console.log(formErrors);
+    } else {
+      axios.post('backendexpressfinalproject-production.up.railway.app/login', form)
+        .then((res) => {
+          localStorage.setItem('token', res.data.token);
+          localStorage.setItem('user', JSON.stringify(res.data.user));
+          localStorage.setItem('isAmdin', res.data.user.admin);
+          changeLogin(res.data.user, res.data.admin);
+          navigate('/');//TODO navigate to page depending on user type
+        }).catch((err) => {
+          newError.noLogin = 'Email or password is incorrect';
+          setError(newError);
+        });
+    }
+  };
+
+  const handleClick = () => {
+    navigate('/register');
+  };
+
   return (
     <MDBContainer fluid>
 
@@ -48,7 +109,7 @@ function LoginComponent() {
               </div>
 
               <div>
-                <p className="mb-0">Don't have an account? <a href="#!" class="text-black-50 fw-bold">Register</a></p>
+                <p className="mb-0">Don't have an account? <a class="text-black-50 fw-bold" onClick={handleClick}>Register</a></p>
 
               </div>
             </MDBCardBody>
