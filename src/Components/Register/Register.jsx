@@ -4,8 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { useUserToggleContext } from '../../UserProvider';
 import axios from 'axios';
 
-import './Register.scss';
-
 const RegisterComponent = () => {
     return (
         <section class="h-100 bg-dark">
