@@ -1,5 +1,4 @@
 
-
 import React, { useState } from 'react';
 import {
   MDBBtn,
@@ -56,13 +55,23 @@ const LoginComponent = () => {
       setError(formErrors);
       console.log(formErrors);
     } else {
-      axios.post('backendexpressfinalproject-production.up.railway.app/login', form)
+      axios.post('https://backendexpressfinalproject-production.up.railway.app/user/login', form)
         .then((res) => {
+          console.log(res.data);
           localStorage.setItem('token', res.data.token);
           localStorage.setItem('user', JSON.stringify(res.data.user));
           localStorage.setItem('isAmdin', res.data.user.admin);
           changeLogin(res.data.user, res.data.admin);
-          navigate('/');//TODO navigate to page depending on user type
+          //navigate to page depending on user type wit if statement
+          if (res.data.user.admin === true) {
+            navigate('/admin');
+          } if (res.data.user === true) {
+            navigate('/booking');
+          } else {
+            navigate('/timetable');
+          }
+
+
         }).catch((err) => {
           newError.noLogin = 'Email or password is incorrect';
           setError(newError);
@@ -89,8 +98,8 @@ const LoginComponent = () => {
               <MDBInput wrapperClass='mb-4 mx-5 w-100' labelClass='text-black' label='Email address' id='formControlLg' type='email' size="lg"/>
               <MDBInput wrapperClass='mb-4 mx-5 w-100' labelClass='text-black' label='Password' id='formControlLg' type='password' size="lg"/>
 
-              <p className="small mb-3 pb-lg-2"><a class="text-black-50" href="#!">Forgot password?</a></p>
-              <MDBBtn outline className='mx-2 px-5' color='black' size='lg'>
+              
+              <MDBBtn outline className='mx-2 px-5' color='black' size='lg' onClick={handleSubmit}>
                 Login
               </MDBBtn>
 
