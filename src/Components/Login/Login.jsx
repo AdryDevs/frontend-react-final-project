@@ -63,15 +63,12 @@ const LoginComponent = () => {
           localStorage.setItem('username', JSON.stringify(res.data.user));
           localStorage.setItem('isAmdin', res.data.user.admin);
           changeLogin(res.data.user, res.data.admin);
-          //navigate to page depending on user type wit if statement
-          if (res.data.user.admin === true) {
+          
+          if (res.data.user.admin) {
             navigate('/admin');
-          } if (res.data.user === true) {
-            navigate('/booking');
           } else {
-            navigate('/timetable');
+            navigate('/booking');
           }
-
 
         }).catch((err) => {
           newError.noLogin = 'Email or password is incorrect';
