@@ -1,11 +1,10 @@
-.containerLogin{
-    background-size: cover;
-    height: 94vh;
-    width: 100%;
-    position: fixed;
-}
-
-.containerLogin{
+.containerLogin {
     background-image: url("https://images.pexels.com/photos/255379/pexels-photo-255379.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
