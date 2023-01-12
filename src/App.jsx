@@ -9,6 +9,7 @@ import { UserProvider } from './UserProvider';
 //import Containers
 import Login from './Containers/LoginContainer/LoginContainer';
 import Register from './Containers/RegisterContainer/RegisterContainer';
+import Admin from './Containers/AdminContainer/AdminContainer';
 
 
 function App() {
@@ -18,7 +19,8 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Login />} />
-            <Route path="/register" element={<Register />} />            
+            <Route path="/register" element={<Register />} />
+            <Route path="/admin" element={<Admin />} />
           </Routes>
         </BrowserRouter>
       </Container>
