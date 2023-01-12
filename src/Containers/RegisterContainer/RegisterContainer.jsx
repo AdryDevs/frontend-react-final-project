@@ -6,7 +6,13 @@ import Register from "../../Components/Register/Register";
 
 const RegisterContainer = () => {
     return (
-            <Register /> 
+        <Row className="containerRegister">
+            <Col />
+            <Col xs={10} sm={8} md={6} lg={12}>
+            <Register />
+            </Col>
+            <Col />
+        </Row>
     );
 }
 

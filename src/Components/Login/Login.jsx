@@ -55,11 +55,12 @@ const LoginComponent = () => {
       setError(formErrors);
       console.log(formErrors);
     } else {
+      console.log(form);
       axios.post('https://backendexpressfinalproject-production.up.railway.app/user/login', form)
         .then((res) => {
           console.log(res.data);
           localStorage.setItem('token', res.data.token);
-          localStorage.setItem('user', JSON.stringify(res.data.user));
+          localStorage.setItem('username', JSON.stringify(res.data.user));
           localStorage.setItem('isAmdin', res.data.user.admin);
           changeLogin(res.data.user, res.data.admin);
           //navigate to page depending on user type wit if statement
@@ -95,8 +96,8 @@ const LoginComponent = () => {
               <h2 className="fw-bold mb-2 text-uppercase">Welcome!</h2>
               <p className="text-black-50 mb-5">Please enter your email and password</p>
 
-              <MDBInput wrapperClass='mb-4 mx-5 w-100' labelClass='text-black' label='Email address' id='formControlLg' type='email' size="lg"/>
-              <MDBInput wrapperClass='mb-4 mx-5 w-100' labelClass='text-black' label='Password' id='formControlLg' type='password' size="lg"/>
+              <MDBInput wrapperClass='mb-4 mx-5 w-100' labelClass='text-black' label='Email address' id='formControlLg' type='email' size="lg" onChange={(e) => setField('email', e.target.value)}/>
+              <MDBInput wrapperClass='mb-4 mx-5 w-100' labelClass='text-black' label='Password' id='formControlLg' type='password' size="lg" onChange={(e) => setField('password', e.target.value)}/>
 
               
               <MDBBtn outline className='mx-2 px-5' color='black' size='lg' onClick={handleSubmit}>
