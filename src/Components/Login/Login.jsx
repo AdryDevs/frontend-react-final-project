@@ -63,6 +63,7 @@ const LoginComponent = () => {
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
       const { data } = await axios.post(API_URL, values);
+      console.log(data);
       if (data) {
         localStorage.setItem('token', data.token);
         localStorage.setItem('username', JSON.stringify(data.user));
@@ -76,15 +77,11 @@ const LoginComponent = () => {
         const { data } = error.response;
         if (data) {
           dispatchErrors({ type: 'SET_ERRORS', field: 'email', error: data.error });
+          const { errors } = data.message
         }
       }
       setSubmitting(false);
     }
-
-    const handleRegister = () => {
-      navigate('/register');
-    };
-
 
     axios.post(API_URL, form)
       .then((res) => {
@@ -110,7 +107,7 @@ const LoginComponent = () => {
       <MDBRow className="d-flex justify-content-center align-items-center h-100">
         <MDBCol col="12">
           <MDBCard className="text-black my-5 mx-auto" style={{ borderRadius: '1rem', maxWidth: '400px' }}>
-            <MDBCardBody className="p-5 d-flex flex-column align-items-center mx-auto w-100">
+            <MDBCardBody className='px-5 d-flex flex-column align-items-center mx-auto w-100'>
               <h2 className="fw-bold mb-2 text-uppercase">Welcome!</h2>
               <p className="text-black-50 mb-5">Please enter your email and password</p>
               <Formik
@@ -120,6 +117,9 @@ const LoginComponent = () => {
               >
                 {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
                   <form onSubmit={handleSubmit}>
+                    <div className={`error ${errors.email && touched.email ? 'd-block' : 'd-none'}`}>
+                      {errors.email}
+                    </div>
                     <MDBInput
                       type="email"
                       name="email"
@@ -127,23 +127,22 @@ const LoginComponent = () => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                       label="Email"
-                      wrapperClass='mb-4 mx-5 w-100'
+                      wrapperClass='mb-4 mx-auto w-100'
                       labelClass='text-black'
                       id='formControlLg'
                       size="lg"
                       error={errors.email && touched.email && errors.email}
                     />
-                    <div className={`error ${errors.email && touched.email ? 'd-block' : 'd-none'}`}>
-                      {errors.email}
-                    </div>
+
                     <MDBInput
+                      label="Password"
                       type="password"
                       name="password"
                       value={values.password}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      label="Password"
-                      wrapperClass='mb-4 mx-5 w-100'
+
+                      wrapperClass='mb-4 mx-auto w-100'
                       labelClass='text-black'
                       id='formControlLg'
                       size="lg"
@@ -157,7 +156,7 @@ const LoginComponent = () => {
                       {globalError}
                     </div>
 
-                    <MDBBtn type="submit" className='mx-2 px-5' color='black' size='lg' onClick={handleSubmit}>
+                    <MDBBtn type="button" className='mx-2 px-5' color='black' size='lg' >
                       Register
                     </MDBBtn>
                   </form>

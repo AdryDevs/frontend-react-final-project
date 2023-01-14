@@ -1,13 +1,14 @@
 
 import React from "react";
-import AdminComponent from "../../Components/Admin/Admin";
+import AdminBooking from "../../Components/Admin/AdminBooking";
+import Header from "../../Components/Admin/AdminHeader";
 
 const AdminContainer = () => {
     
     return (
-        <>
-            <AdminComponent/>
-        </>
+        <div>
+            <Header/>
+        </div>
     )
 }
 

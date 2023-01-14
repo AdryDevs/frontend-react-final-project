@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const BookingComponent = () => {
+const AdminBooking = () => {
 
-    const API_URL = 'https://backendexpressfinalproject-production.up.railway.app/booking/all';
+    const API_URL = 'https://backendexpressfinalproject-production.up.railway.app/booking/';
     const [bookings, setBookings] = useState([]);
 
     useEffect(() => {
@@ -50,4 +50,4 @@ const BookingComponent = () => {
     );
 };
 
-export default BookingComponent;
+export default AdminBooking;

@@ -61,4 +61,13 @@
     font-size:.8rem;
   }
   
+  .MDBInput label {
+    position: absolute;
+    top: -20px;
+    left: 0;
+    font-size: 14px;
+    font-weight: 400;
+    color: #757575;
+    transition: all 0.2s ease-in-out;
+  }
   

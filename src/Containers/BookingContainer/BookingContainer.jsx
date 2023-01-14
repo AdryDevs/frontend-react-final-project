@@ -1,11 +1,11 @@
 
 import React from "react";
-import BookingComponent from "../../Components/Booking/Booking";
+import AdminBooking from "../../Components/Admin/AdminBooking";
 
 const BookingContainer = () => {
     return (
         <>
-        <BookingComponent/>
+        <AdminBooking/>
         </>
     )
 
