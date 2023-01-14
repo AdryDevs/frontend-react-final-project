@@ -10,6 +10,7 @@ import { UserProvider } from './UserProvider';
 import Login from './Containers/LoginContainer/LoginContainer';
 import Register from './Containers/RegisterContainer/RegisterContainer';
 import Admin from './Containers/AdminContainer/AdminContainer';
+import Booking from './Containers/BookingContainer/BookingContainer';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
             <Route path="/" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/admin" element={<Admin />} />
+            <Route path="/booking" element={<Booking />} />
           </Routes>
         </BrowserRouter>
       </Container>
