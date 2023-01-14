@@ -1,105 +1,142 @@
-import React from 'react';
-import {
-  MDBBtn,
-  MDBContainer,
-  MDBCard,
-  MDBCardBody,
-  MDBInput,
-  MDBCheckbox
-}
-  from 'mdb-react-ui-kit';
+import React, { useReducer } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { MDBBtn, MDBContainer, MDBCard, MDBCardBody, MDBInput, MDBCheckbox } from 'mdb-react-ui-kit';
 import { useUserToggleContext } from '../../UserProvider';
 import axios from 'axios';
-import { useState } from 'react';
-import { useUserContext } from '../../UserProvider';
+import * as Yup from 'yup';
+import { Formik } from 'formik';
 
 function RegisterComponent() {
 
-  const [form, setForm] = useState({});
-  const [errors, setErrors] = useState({});
+  const API_URL = 'https://backendexpressfinalproject-production.up.railway.app/user/register';
   const navigate = useNavigate();
   const changeLogin = useUserToggleContext();
+  const initialFormState = {
+    username: '',
+    email: '',
+    dob: '',
+    password: '',
+    password2: '',
+  };
+  const initialErrorsState = {
+    username: '',
+    email: '',
+    dob: '',
+    password: '',
+    password2: '',
+  };
 
-  const setField = (field, value) => {
-    setForm({
-      ...form,
-      [field]: value
-    })
-    if (!!errors[field])
-      setErrors({
-        ...errors,
-        [field]: null
-      })
-  }
-
-  const validateForm = () => {
-    const { username, email, dob, password, password2 } = form;
-    const newErrors = {};
-
-    if (!username || username === "") newErrors.username = 'Please enter a username'
-    if (!email || email === "") {
-      newErrors.email = 'Please enter an email'
-    } else if (!/.+\@.+\..+/.test(email)) newErrors.email = 'Please input a valid email'
-    if (!password || password === "") newErrors.password = 'Please enter a password'
-    else {
-      if (!/[?=.*[0-9]]*/.test(password)) newErrors.password = 'Password must contain a number'
-      if (!/[?=.*[a-z]]*/.test(password)) newErrors.password = 'Password must contain at least 1 lower case'
-      if (!/[?=.*[A-Z]]*/.test(password)) newErrors.password = 'Password must contain at least 1 upper case'
-      if (!/[[a-zA-Z0-9]{8,}]*/.test(password)) newErrors.password = 'Password must contain at least 8 characters'
+  const formReducer = (state, action) => {
+    switch (action.type) {
+      case 'SET_FIELD':
+        return {
+          ...state,
+          [action.field]: action.value,
+        };
+      case 'SET_ERRORS':
+        return {
+          ...state,
+          [action.field]: action.error,
+        };
+      default:
+        return state;
     }
+  };
 
-    if (!password2 || password2 === "") newErrors.password2 = 'Please repeat your password'
-    else if (password2 !== password) newErrors.password2 = 'The passwords do not match'
+  const [form, dispatchForm] = useReducer(formReducer, initialFormState);
+  const [errors, dispatchErrors] = useReducer(formReducer, initialErrorsState);
 
-    return newErrors;
-  }
+  const validationSchema = Yup.object().shape({
+    username: Yup.string().required('Please enter a username'),
+    email: Yup.string()
+      .email('Please input a valid email')
+      .required('Please enter an email'),
+    password: Yup.string()
+      .matches(/[?=.*[0-9]]*/, 'Password must contain a number')
+      .matches(/[?=.*[a-z]]*/, 'Password must contain at least 1 lower case')
+      .matches(/[?=.*[A-Z]]*/, 'Password must contain at least 1 upper case')
+      .matches(/[[a-zA-Z0-9]{8,}]*/, 'Password must contain at least 8 characters')
+      .required('Please enter a password'),
+    password2: Yup.string()
+      .oneOf([Yup.ref('password'), null], 'The passwords do not match')
+      .required('Please repeat your password'),
+  });
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const formErrors = validateForm();
-    if (Object.keys(formErrors).length > 0) {
-      setErrors(formErrors);
-    } else {
-      console.log("form submitted")
-      e.preventDefault()
-      axios.post("https://backendexpressfinalproject-production.up.railway.app/user/register", form)
-        .then(response => {
-          console.log(response);
-          if (response) {
-            console.log("Logging in");
-            const body = {
-              email: form.email,
-              password: form.password
-            }
-            axios.post("https://backendexpressfinalproject-production.up.railway.app/user/register", body)
-              .then(response => {
-                localStorage.setItem('token', JSON.stringify(response.data.jwt));
-                localStorage.setItem('username', response.data.username);
-                localStorage.setItem('isAdmin', response.data.admin);
-                changeLogin(response.data.username, response.data.admin);
-                navigate("/"); //TODO navigate depending on user role
-              });
-          }
-        });
-
-    }
-  }
-  return (
-    <MDBContainer fluid className='d-flex align-items-center justify-content-center' >
-      <div className='mask gradient-custom-3'></div>
-      <MDBCard className='m-5' style={{ maxWidth: '600px' }}>
+  const handleSubmit = async (values, { setSubmitting }) => {
+    try {
+      const response = await axios.post(API_URL, values);
+      setSubmitting(false);
+      if (response) {
+        sessionStorage.setItem('token', JSON.stringify(response.data.jwt));
+        sessionStorage.setItem('username', response.data.username);
+        sessionStorage.setItem('isAdmin', response.data.admin);
+        changeLogin(response.data.username, response.data.admin);
+        navigate.push(response.data.admin ? '/admin' : '/');
+        }
+        } catch (error) {
+        console.log(error);
+        }
+        };
+        
+        return (
+        <MDBContainer fluid className='d-flex align-items-center justify-content-center' >
+        <div className='mask gradient-custom-3'></div>
+        <MDBCard className='m-5' style={{ maxWidth: '600px' }}>
         <MDBCardBody className='px-5'>
-          <h2 className="text-uppercase text-center mb-5">Create an account</h2>
-          <MDBInput wrapperClass='mb-4' label='Username' size='lg' id='form1' type='text' onChange={(e) => setField('username', e.target.value)} />
-          <MDBInput wrapperClass='mb-4' label='Email' size='lg' id='form2' type='email' onChange={(e) => setField('email', e.target.value)} />
-          <MDBInput wrapperClass='mb-4' label='Password' size='lg' id='form3' type='password' onChange={(e) => setField('password', e.target.value)} />
-          <MDBInput wrapperClass='mb-4' label='Confirm password' size='lg' id='form4' type='password' onChange={(e) => setField('password2', e.target.value)}/>
-          <MDBBtn className='mb-4 w-100 gradient-custom-4' size='lg' onClick={handleSubmit}>Register</MDBBtn>
+        <h2 className="text-uppercase text-center mb-5">Create an account</h2>
+        <Formik
+                 initialValues={initialFormState}
+                 validationSchema={validationSchema}
+                 onSubmit={handleSubmit}
+               >
+        {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
+        <form onSubmit={handleSubmit}>
+        <MDBInput
+        type="text"
+        name="username"
+        value={values.username}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        label="Username"
+        error={errors.username && touched.username && errors.username}
+        />
+        <MDBInput
+        type="email"
+        name="email"
+        value={values.email}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        label="Email"
+        error={errors.email && touched.email && errors.email}
+        />
+        <MDBInput
+        type="password"
+        name="password"
+        value={values.password}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        label="Password"
+        error={errors.password && touched.password && errors.password}
+        />
+        <MDBInput
+        type="password"
+        name="password2"
+        value={values.password2}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        label="Confirm Password"
+        error={errors.password2 && touched.password2 && errors.password2}
+        />
+        <div className="text-center">
+        <MDBBtn disabled={isSubmitting} type="submit">Submit</MDBBtn>
+        </div>
+        </form>
+        )}
+        </Formik>
         </MDBCardBody>
-      </MDBCard>
-    </MDBContainer>
-  );
-}
-
-export default RegisterComponent;
+        </MDBCard>
+        </MDBContainer>
+        );
+        }
+        
+        export default RegisterComponent;
