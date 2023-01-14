@@ -8,7 +8,7 @@ const RegisterContainer = () => {
     return (
         <Row className="containerRegister">
             <Col />
-            <Col xs={10} sm={8} md={6} lg={12}>
+            <Col xs={12} sm={10} md={8} lg={8}>
             <Register />
             </Col>
             <Col />
