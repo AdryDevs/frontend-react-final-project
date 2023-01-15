@@ -126,7 +126,6 @@ const LoginComponent = () => {
                       value={values.password}
                       onChange={handleChange}
                       onBlur={handleBlur}
-
                       wrapperClass='mb-4 mx-auto w-100'
                       labelClass='text-black'
                       id='formControlLg'
@@ -139,7 +138,6 @@ const LoginComponent = () => {
                     <div className={`error global-error ${globalError ? 'd-block' : 'd-none'}`}>
                       {globalError}
                     </div>
-
                     <MDBBtn type="button" className='mx-2 px-5' color='black' size='lg' onClick={() => navigate('/register')}>
                       Register
                     </MDBBtn>
