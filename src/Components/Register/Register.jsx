@@ -5,6 +5,7 @@ import { useUserToggleContext } from '../../UserProvider';
 import axios from 'axios';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
+import './Register.scss';
 
 function RegisterComponent() {
 
@@ -72,71 +73,74 @@ function RegisterComponent() {
         sessionStorage.setItem('isAdmin', response.data.admin);
         changeLogin(response.data.username, response.data.admin);
         navigate.push(response.data.admin ? '/admin' : '/');
-        }
-        } catch (error) {
-        console.log(error);
-        }
-        };
-        
-        return (
-        <MDBContainer fluid className='d-flex align-items-center justify-content-center' >
-        <div className='mask gradient-custom-3'></div>
-        <MDBCard className='m-5' style={{ maxWidth: '600px' }}>
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return (
+    <MDBContainer fluid className='d-flex align-items-center justify-content-center' >
+      <div className='mask gradient-custom-3'></div>
+      <MDBCard className='m-5' style={{ maxWidth: '600px' }}>
         <MDBCardBody className='px-5'>
-        <h2 className="text-uppercase text-center mb-5">Create an account</h2>
-        <Formik
-                 initialValues={initialFormState}
-                 validationSchema={validationSchema}
-                 onSubmit={handleSubmit}
-               >
-        {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
-        <form onSubmit={handleSubmit}>
-        <MDBInput
-        type="text"
-        name="username"
-        value={values.username}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        label="Username"
-        error={errors.username && touched.username && errors.username}
-        />
-        <MDBInput
-        type="email"
-        name="email"
-        value={values.email}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        label="Email"
-        error={errors.email && touched.email && errors.email}
-        />
-        <MDBInput
-        type="password"
-        name="password"
-        value={values.password}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        label="Password"
-        error={errors.password && touched.password && errors.password}
-        />
-        <MDBInput
-        type="password"
-        name="password2"
-        value={values.password2}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        label="Confirm Password"
-        error={errors.password2 && touched.password2 && errors.password2}
-        />
-        <div className="text-center">
-        <MDBBtn disabled={isSubmitting} type="submit">Submit</MDBBtn>
-        </div>
-        </form>
-        )}
-        </Formik>
+          <h2 className="text-uppercase text-center mb-5">Create an account</h2>
+          <Formik
+            initialValues={initialFormState}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}
+          >
+            {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
+              <form onSubmit={handleSubmit}>
+                <MDBInput
+                  type="text"
+                  name="username"
+                  value={values.username}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  label="Username"
+                  error={errors.username && touched.username && errors.username}
+                />
+                <div className={`error ${errors.username && touched.username ? 'd-block' : 'd-none'}`}>
+                  {errors.username}
+                </div>
+                <MDBInput
+                  type="email"
+                  name="email"
+                  value={values.email}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  label="Email"
+                  error={errors.email && touched.email && errors.email}
+                />
+                <MDBInput
+                  type="password"
+                  name="password"
+                  value={values.password}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  label="Password"
+                  error={errors.password && touched.password && errors.password}
+                />
+                <MDBInput
+                  type="password"
+                  name="password2"
+                  value={values.password2}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  label="Confirm Password"
+                  error={errors.password2 && touched.password2 && errors.password2}
+                />
+                <div className="text-center">
+                  <MDBBtn disabled={isSubmitting} type="submit">Submit</MDBBtn>
+                </div>
+              </form>
+            )}
+          </Formik>
         </MDBCardBody>
-        </MDBCard>
-        </MDBContainer>
-        );
-        }
-        
-        export default RegisterComponent;
+      </MDBCard>
+    </MDBContainer>
+  );
+}
+
+export default RegisterComponent;

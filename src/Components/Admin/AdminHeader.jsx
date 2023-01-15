@@ -2,8 +2,9 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useNavigate } from 'react-router';
+import './AdminHeader.scss';
 
-function AdminComponent() {
+function AdminHeader() {
 
     const navigate = useNavigate();
 
@@ -20,9 +21,9 @@ function AdminComponent() {
     }
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar id='nav' bg="light" expand="lg">
       <Container>
-        <Navbar.Brand>Administrator</Navbar.Brand>
+        <Navbar.Brand>Admin</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
@@ -38,4 +39,4 @@ function AdminComponent() {
   );
 }
 
-export default AdminComponent;
+export default AdminHeader;
