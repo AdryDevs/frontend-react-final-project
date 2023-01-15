@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './AdminBooking.scss';
 
 const AdminBooking = () => {
 
@@ -9,7 +10,7 @@ const AdminBooking = () => {
     useEffect(() => {
         axios.get(API_URL)
             .then(res => {
-                setBookings(res.data);
+                setBookings(res.data, console.log(res.data));
             })
             .catch(err => {
                 console.log(err);
@@ -17,17 +18,15 @@ const AdminBooking = () => {
     }, []);
 
     return (
-        <div>
+        <div className='table'>
             <h2>Bookings</h2>
             <table className="table">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Email</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Total Price</th>
-                        <th>Actions</th>
+                        <th>Date</th>
+                        <th>Username</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,9 +34,8 @@ const AdminBooking = () => {
                         <tr key={booking.id}>
                             <td>{booking.id}</td>
                             <td>{booking.email}</td>
-                            <td>{booking.startDate}</td>
-                            <td>{booking.endDate}</td>
-                            <td>{booking.totalPrice}</td>
+                            <td>{booking.date}</td>
+                            <td>{booking.username}</td>
                             <td>
                                 <button className="btn btn-danger mr-2" onClick={() => handleDelete(booking.id)}>Delete</button>
                                 <button className="btn btn-primary" onClick={() => handleEdit(booking.id)}>Edit</button>
