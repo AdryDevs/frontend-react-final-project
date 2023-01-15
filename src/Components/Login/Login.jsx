@@ -55,7 +55,7 @@ const LoginComponent = () => {
 
   const validationSchema = Yup.object().shape({
     email: Yup.string()
-      .email('Please input a valid email')
+      .email('Please enter a valid email')
       .required('Please enter an email'),
     password: Yup.string().required('Please enter a password'),
   });
@@ -82,24 +82,6 @@ const LoginComponent = () => {
       }
       setSubmitting(false);
     }
-
-    axios.post(API_URL, form)
-      .then((res) => {
-        console.log(res.data);
-        localStorage.setItem('token', res.data.token);
-        localStorage.setItem('username', JSON.stringify(res.data.user));
-        localStorage.setItem('isAmdin', res.data.user.admin);
-        changeLogin(res.data.user, res.data.admin);
-
-        if (res.data.user.admin) {
-          navigate('/admin');
-        } else {
-          navigate('/booking');
-        }
-
-      }).catch((err) => {
-        setGlobalError('Email or password is incorrect');
-      });
   };
 
   return (
@@ -117,6 +99,8 @@ const LoginComponent = () => {
               >
                 {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
                   <form onSubmit={handleSubmit}>
+                    
+                    <label htmlFor="email" className="form-label">Email</label>
                     <div className={`error ${errors.email && touched.email ? 'd-block' : 'd-none'}`}>
                       {errors.email}
                     </div>
@@ -126,37 +110,35 @@ const LoginComponent = () => {
                       value={values.email}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      label="Email"
                       wrapperClass='mb-4 mx-auto w-100'
                       labelClass='text-black'
                       id='formControlLg'
                       size="lg"
                       error={errors.email && touched.email && errors.email}
                     />
-
+                    <label htmlFor="password" className="form-label">Password</label>
+                    <div className={`error ${errors.password && touched.password ? 'd-block' : 'd-none'}`}>
+                      {errors.password}
+                    </div>
                     <MDBInput
-                      label="Password"
                       type="password"
                       name="password"
                       value={values.password}
                       onChange={handleChange}
                       onBlur={handleBlur}
-
                       wrapperClass='mb-4 mx-auto w-100'
                       labelClass='text-black'
                       id='formControlLg'
                       size="lg"
                       error={errors.password && touched.password && errors.password}
                     />
-                    <p className="text-danger">{errors.password}</p>
                     <div className="text-center">
-                      <MDBBtn disabled={isSubmitting} type="submit">Submit</MDBBtn>
+                      <MDBBtn disabled={isSubmitting} type="submit" onClick={() => navigate('/user')}>Login</MDBBtn>
                     </div>
                     <div className={`error global-error ${globalError ? 'd-block' : 'd-none'}`}>
                       {globalError}
                     </div>
-
-                    <MDBBtn type="button" className='mx-2 px-5' color='black' size='lg' >
+                    <MDBBtn type="button" className='mx-2 px-5' color='black' size='lg' onClick={() => navigate('/register')}>
                       Register
                     </MDBBtn>
                   </form>
