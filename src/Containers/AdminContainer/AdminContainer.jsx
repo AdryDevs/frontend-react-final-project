@@ -1,14 +1,18 @@
 
 import React from "react";
-import AdminBooking from "../../Components/Admin/AdminBooking";
+import { Container } from "react-bootstrap";
 import Header from "../../Components/Admin/AdminHeader";
+
 
 const AdminContainer = () => {
     
-    return (
+    return (  
+        <>
         <div>
             <Header/>
         </div>
+        </>
+
     )
 }
 

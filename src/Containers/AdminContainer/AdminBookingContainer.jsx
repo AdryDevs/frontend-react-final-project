@@ -7,7 +7,7 @@ import Header from "../../Components/Admin/AdminHeader";
 const AdminContainer = () => {
 
     return (
-        <Container className="fluid d-flex flex-column">
+        <div>
             <Row>
                 <Col>
                     <Header />
@@ -18,7 +18,7 @@ const AdminContainer = () => {
                     <AdminBooking />
                 </Col>
             </Row>
-        </Container>
+        </div>
     )
 }
 

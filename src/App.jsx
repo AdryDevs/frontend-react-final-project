@@ -13,6 +13,7 @@ import Admin from './Containers/AdminContainer/AdminContainer';
 import Booking from './Containers/BookingContainer/BookingContainer';
 import AdminUsers from './Containers/AdminContainer/AdminUsersContainer';
 import AdminBooking from './Containers/AdminContainer/AdminBookingContainer';
+import Header from './Components/Admin/AdminHeader';
 
 
 function App() {

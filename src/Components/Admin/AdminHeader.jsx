@@ -6,35 +6,35 @@ import './AdminHeader.scss';
 
 function AdminHeader() {
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const handleBookings = () => {
-        navigate("/admin/bookings");
-    }
+  const handleBookings = () => {
+    navigate("/admin/bookings");
+  }
 
-    const handleEmployees = () => {
-        navigate("/admin/employees");
-    }
+  const handleEmployees = () => {
+    navigate("/admin/employees");
+  }
 
-    const handleUsers = () => {
-        navigate("/admin/users");
-    }
+  const handleUsers = () => {
+    navigate("/admin/users");
+  }
 
   return (
     <Navbar id='nav' bg="light" expand="lg">
-      <Container>
-        <Navbar.Brand>Admin</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link onClick={handleBookings}>Bookings</Nav.Link>
-            <Nav.Link onClick={handleEmployees}>Employees</Nav.Link>
-            <Nav.Link onClick={handleUsers}>Resgistered Users</Nav.Link>
 
-            
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
+      <Navbar.Brand>Admin</Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="me-auto">
+          <Nav.Link onClick={handleBookings}>Bookings</Nav.Link>
+          <Nav.Link onClick={handleEmployees}>Employees</Nav.Link>
+          <Nav.Link onClick={handleUsers}>Resgistered Users</Nav.Link>
+
+
+        </Nav>
+      </Navbar.Collapse>
+
     </Navbar>
   );
 }

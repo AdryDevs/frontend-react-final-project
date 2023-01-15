@@ -8,18 +8,18 @@ import { Container, Row, Col } from "react-bootstrap";
 const AdminUsersContainer = () => {
 
     return (
-        <Container className="fluid d-flex justify-content-center align-items-center" >
+        <div>
             <Row>
                 <Col>
                     <Header />
                 </Col>
             </Row>
             <Row>
-            <Col>
-                <AdminUsersComponent />
+                <Col>
+                    <AdminUsersComponent />
                 </Col>
             </Row>
-        </Container>
+        </div>
     )
 }
 

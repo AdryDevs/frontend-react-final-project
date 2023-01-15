@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './AdminUsers.scss';
 
 const AdminUsersComponent = () => {
     const [users, setUsers] = useState([]);
@@ -13,8 +14,8 @@ const AdminUsersComponent = () => {
     }, []);
 
     return (
-        <div>
-            <h2>All Users</h2>
+        <div className='table'>
+            <h2>All registered users on the Database</h2>
             <table>
                 <thead>
                     <tr>
