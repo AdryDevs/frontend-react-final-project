@@ -117,6 +117,8 @@ const LoginComponent = () => {
               >
                 {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
                   <form onSubmit={handleSubmit}>
+                    
+                    <label htmlFor="email" className="form-label">Email</label>
                     <div className={`error ${errors.email && touched.email ? 'd-block' : 'd-none'}`}>
                       {errors.email}
                     </div>
@@ -126,16 +128,17 @@ const LoginComponent = () => {
                       value={values.email}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      label="Email"
                       wrapperClass='mb-4 mx-auto w-100'
                       labelClass='text-black'
                       id='formControlLg'
                       size="lg"
                       error={errors.email && touched.email && errors.email}
                     />
-
+                    <label htmlFor="password" className="form-label">Password</label>
+                    <div className={`error ${errors.password && touched.password ? 'd-block' : 'd-none'}`}>
+                      {errors.password}
+                    </div>
                     <MDBInput
-                      label="Password"
                       type="password"
                       name="password"
                       value={values.password}
@@ -148,15 +151,14 @@ const LoginComponent = () => {
                       size="lg"
                       error={errors.password && touched.password && errors.password}
                     />
-                    <p className="text-danger">{errors.password}</p>
                     <div className="text-center">
-                      <MDBBtn disabled={isSubmitting} type="submit">Submit</MDBBtn>
+                      <MDBBtn disabled={isSubmitting} type="submit" >Login</MDBBtn>
                     </div>
                     <div className={`error global-error ${globalError ? 'd-block' : 'd-none'}`}>
                       {globalError}
                     </div>
 
-                    <MDBBtn type="button" className='mx-2 px-5' color='black' size='lg' >
+                    <MDBBtn type="button" className='mx-2 px-5' color='black' size='lg'  >
                       Register
                     </MDBBtn>
                   </form>

@@ -92,17 +92,21 @@ function RegisterComponent() {
           >
             {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
               <form onSubmit={handleSubmit}>
+                <label><b>Username</b></label>
+                <div className={`error ${errors.username && touched.username ? 'd-block' : 'd-none'}`}>
+                  {errors.username}
+                </div>
                 <MDBInput
                   type="text"
                   name="username"
                   value={values.username}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  label="Username"
                   error={errors.username && touched.username && errors.username}
                 />
-                <div className={`error ${errors.username && touched.username ? 'd-block' : 'd-none'}`}>
-                  {errors.username}
+                <label><b>Email</b></label>
+                <div className={`error ${errors.email && touched.email ? 'd-block' : 'd-none'}`}>
+                  {errors.email}
                 </div>
                 <MDBInput
                   type="email"
@@ -110,29 +114,31 @@ function RegisterComponent() {
                   value={values.email}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  label="Email"
                   error={errors.email && touched.email && errors.email}
                 />
+                <label><b>Password</b></label>
+                <div className={`error ${errors.password && touched.password ? 'd-block' : 'd-none'}`}>
+                  {errors.password}
+                </div>
                 <MDBInput
                   type="password"
                   name="password"
                   value={values.password}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  label="Password"
                   error={errors.password && touched.password && errors.password}
                 />
+                <label><b>Confirm Password</b></label>
                 <MDBInput
                   type="password"
                   name="password2"
                   value={values.password2}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  label="Confirm Password"
                   error={errors.password2 && touched.password2 && errors.password2}
                 />
                 <div className="text-center">
-                  <MDBBtn disabled={isSubmitting} type="submit">Submit</MDBBtn>
+                  <MDBBtn disabled={isSubmitting} type="submit">Register</MDBBtn>
                 </div>
               </form>
             )}
