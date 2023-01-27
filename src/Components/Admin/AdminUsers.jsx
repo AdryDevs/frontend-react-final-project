@@ -5,7 +5,7 @@ import './AdminUsers.scss';
 
 const AdminUsersComponent = () => {
     const [users, setUsers] = useState([]);
-    const API_URL = 'https://backendexpressfinalproject-production.up.railway.app/user/all';
+    const API_URL = 'http://localhost:3000/user/all';
 
     useEffect(() => {
         axios.get(API_URL)

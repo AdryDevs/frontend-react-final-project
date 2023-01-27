@@ -9,7 +9,7 @@ import './Register.scss';
 
 function RegisterComponent() {
 
-  const API_URL = 'https://backendexpressfinalproject-production.up.railway.app/user/register';
+  const API_URL = 'http://localhost:3000/user/register';
   const navigate = useNavigate();
   const changeLogin = useUserToggleContext();
   const initialFormState = {

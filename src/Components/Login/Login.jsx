@@ -20,7 +20,7 @@ import './Login.scss';
 
 const LoginComponent = () => {
 
-  const API_URL = 'https://backendexpressfinalproject-production.up.railway.app/user/login';
+  const API_URL = 'http://localhost:3000/user/login';
   const navigate = useNavigate();
   const changeLogin = useUserToggleContext();
   const [globalError, setGlobalError] = useState('');
@@ -70,7 +70,10 @@ const LoginComponent = () => {
         localStorage.setItem('isAdmin', data.user.admin);
         changeLogin(data.user, data.admin);
         navigate.push(data.user.admin ? '/admin' : '/booking');
+      } else {
+        setGlobalError('Invalid email or password');
       }
+      setSubmitting(false);
     } catch (error) {
       console.log(error);
       if (error.response) {

@@ -4,8 +4,16 @@ import './AdminBooking.scss';
 
 const AdminBooking = () => {
 
-    const API_URL = 'https://backendexpressfinalproject-production.up.railway.app/booking/';
+    const API_URL = 'http://localhost:3000/booking/';
     const [bookings, setBookings] = useState([]);
+
+    const handleDelete = (id) => {
+        axios.delete(API_URL + id)
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+            })  
+    };
 
     useEffect(() => {
         axios.get(API_URL)

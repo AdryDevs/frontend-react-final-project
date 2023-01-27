@@ -12,10 +12,6 @@ function AdminHeader() {
     navigate("/admin/bookings");
   }
 
-  const handleEmployees = () => {
-    navigate("/admin/employees");
-  }
-
   const handleUsers = () => {
     navigate("/admin/users");
   }
@@ -28,7 +24,6 @@ function AdminHeader() {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="me-auto">
           <Nav.Link onClick={handleBookings}>Bookings</Nav.Link>
-          <Nav.Link onClick={handleEmployees}>Employees</Nav.Link>
           <Nav.Link onClick={handleUsers}>Resgistered Users</Nav.Link>
 
 
