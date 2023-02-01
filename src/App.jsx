@@ -13,7 +13,7 @@ import Admin from './Containers/AdminContainer/AdminContainer';
 import Booking from './Containers/BookingContainer/BookingContainer';
 import AdminUsers from './Containers/AdminContainer/AdminUsersContainer';
 import AdminBooking from './Containers/AdminContainer/AdminBookingContainer';
-import Header from './Components/Admin/AdminHeader';
+import User from './Containers/UserContainer/UserContainer';
 
 
 function App() {
@@ -28,6 +28,7 @@ function App() {
             <Route path="/admin/users" element={<AdminUsers />} />
             <Route path="/booking" element={<Booking />} />
             <Route path="/admin/bookings" element={<AdminBooking />} />
+            <Route path="/user" element={<User />} />
           </Routes>
         </BrowserRouter>
       </Container>

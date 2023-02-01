@@ -1,19 +1,17 @@
-import React, { useState, useEffect } from 'react';
+
+// this is the container for the user page, it will show the user's bookings only
+
+import React from 'react'
+import { useState, useEffect } from 'react';
 import axios from 'axios';
-import './AdminBooking.scss';
 
-const AdminBooking = () => {
 
-    const API_URL = 'http://localhost:3000/tables/admin/all';
+
+const UserPage = () => {
+
+    const API_URL = 'http://localhost:3000/booking/';
+
     const [bookings, setBookings] = useState([]);
-
-    const handleDelete = (id) => {
-        axios.delete(API_URL + id)
-            .then(res => {
-                console.log(res);
-                console.log(res.data);
-            })  
-    };
 
     useEffect(() => {
         axios.get(API_URL)
@@ -56,4 +54,8 @@ const AdminBooking = () => {
     );
 };
 
-export default AdminBooking;
+export default UserPage;
+
+
+
+    
