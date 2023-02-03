@@ -19,24 +19,10 @@ import "./Login.scss";
 const LoginComponent = () => {
   const API_URL = "http://localhost:3000/user/login";
   const navigate = useNavigate();
-  const [form, setForm] = useState({
-    email: "",
-    password: "",
-  });
+  
   const [errors, setErrors] = useState({});
-  const setField = (field, value) => {
-    setForm({
-      ...form,
-      [field]: value,
-    });
-    if (!!errors[field])
-      setErrors({
-        ...errors,
-        [field]: null,
-      });
-  };
 
-  const validateForm = () => {
+  const validateForm = (form) => {
     const { email, password } = form;
     setErrors({
       email: !email ? "Please enter an email" : "",
@@ -56,18 +42,21 @@ const LoginComponent = () => {
 
   const changeLogin = useUserToggleContext();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (form, {setSubmitting, resetForm}) => {
+    setSubmitting(true);
     const newErrors = {};
-    const formErrors = validateForm();
+    const formErrors = validateForm(form);
     if (Object.keys(formErrors).length > 0) {
       setErrors(formErrors);
+      resetForm();
       console.log(formErrors);
     } else {
       axios
         .post(API_URL, form)
         .then((res) => {
-          console.log(res.data);
+          setSubmitting(false);
+          console.log("then",res.data);
+          
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("user", JSON.stringify(res.data.username));
           localStorage.setItem("isAdmin", res.data.admin);
@@ -79,6 +68,8 @@ const LoginComponent = () => {
           }
         })
         .catch((err) => {
+          resetForm();
+          console.log("catch",err);
           newErrors.noLogin = "Invalid email or password";
           setErrors(newErrors);
         });
@@ -173,7 +164,6 @@ const LoginComponent = () => {
                       <MDBBtn
                         disabled={isSubmitting}
                         type="submit"
-                        onClick={() => navigate("/user")}
                       >
                         Login
                       </MDBBtn>

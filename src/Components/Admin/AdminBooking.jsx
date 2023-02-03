@@ -4,7 +4,7 @@ import './AdminBooking.scss';
 
 const AdminBooking = () => {
 
-    const API_URL = 'http://localhost:3000/tables/admin/all';
+    const API_URL = 'http://localhost:3000/booking/';
     const [bookings, setBookings] = useState([]);
 
     const handleDelete = (id) => {
@@ -16,8 +16,14 @@ const AdminBooking = () => {
     };
 
     useEffect(() => {
-        axios.get(API_URL)
+        axios.get(API_URL, {
+            headers: {
+                Authorization: 'Bearer ' +  localStorage.getItem('token')
+            }
+        })
+
             .then(res => {
+                debugger;
                 setBookings(res.data, console.log(res.data));
             })
             .catch(err => {
@@ -43,6 +49,7 @@ const AdminBooking = () => {
                             <td>{booking.id}</td>
                             <td>{booking.email}</td>
                             <td>{booking.date}</td>
+                            
                             <td>{booking.username}</td>
                             <td>
                                 <button className="btn btn-danger mr-2" onClick={() => handleDelete(booking.id)}>Delete</button>

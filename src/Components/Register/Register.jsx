@@ -72,9 +72,10 @@ function RegisterComponent() {
         sessionStorage.setItem('username', response.data.username);
         sessionStorage.setItem('isAdmin', response.data.admin);
         changeLogin(response.data.username, response.data.admin);
-        navigate.push(response.data.admin ? '/admin' : '/');
+        navigate(response.data.admin ? '/admin' : '/user');
       }
     } catch (error) {
+      // TODO: Handle error
       console.log(error);
     }
   };
