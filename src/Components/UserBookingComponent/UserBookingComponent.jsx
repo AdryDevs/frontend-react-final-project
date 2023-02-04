@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './AdminBooking.scss';
+import '../Admin/AdminBooking.scss'
+import UserBookingName from '../UserNameComponent/UserNameComponent';
 
-const AdminBooking = () => {
-
-    const API_URL = 'http://localhost:3000/booking/';
+const UserBooking = () => {
+    const id = localStorage.getItem('id');
+    const API_URL = 'http://localhost:3000/booking/'+ id;
     const [bookings, setBookings] = useState([]);
+
 
 
     const handleDelete = (id) => {
@@ -28,16 +30,19 @@ const AdminBooking = () => {
         })
 
             .then(res => {
-                setBookings(res.data, console.log(res.data));
+
             })
+
             .catch(err => {
                 console.log(err);
             });
     }, []);
 
+
+
     return (
         <div className='table'>
-            <h2>Bookings</h2>
+            <UserBookingName />
             <table className="table">
                 <thead>
                     <tr>
@@ -70,4 +75,4 @@ const AdminBooking = () => {
     );
 };
 
-export default AdminBooking;
+export default UserBooking;

@@ -55,11 +55,11 @@ const LoginComponent = () => {
         .post(API_URL, form)
         .then((res) => {
           setSubmitting(false);
-          console.log("then",res.data);
           
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("user", JSON.stringify(res.data.username));
           localStorage.setItem("isAdmin", res.data.admin);
+          localStorage.setItem("id", JSON.stringify(res.data.id_user));
           changeLogin(res.data.username, res.data.admin);
           if (res.data.admin) {
             navigate("/admin");

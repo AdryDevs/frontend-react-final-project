@@ -75,8 +75,7 @@ function RegisterComponent() {
         navigate(response.data.admin ? '/admin' : '/user');
       }
     } catch (error) {
-      // TODO: Handle error
-      console.log(error);
+      setSubmitting(false);
     }
   };
 
