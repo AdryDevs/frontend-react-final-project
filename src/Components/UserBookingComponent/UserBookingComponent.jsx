@@ -30,7 +30,7 @@ const UserBooking = () => {
         })
 
             .then(res => {
-
+                console.log(res.data);
             })
 
             .catch(err => {
@@ -46,7 +46,6 @@ const UserBooking = () => {
             <table className="table">
                 <thead>
                     <tr>
-                        <th>Username</th>
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Date</th>
@@ -57,7 +56,6 @@ const UserBooking = () => {
                 <tbody>
                     {bookings.map((booking) => (
                         <tr key={booking.id_user}>
-                            <td>{booking.username}</td>
                             <td>{booking.email}</td>
                             <td>{booking.phone}</td>
                             <td>{booking.date}</td>

@@ -1,4 +1,3 @@
-
 import React from "react";
 import {
   MDBBtn,
@@ -19,7 +18,7 @@ import "./Login.scss";
 const LoginComponent = () => {
   const API_URL = "http://localhost:3000/user/login";
   const navigate = useNavigate();
-  
+
   const [errors, setErrors] = useState({});
 
   const validateForm = (form) => {
@@ -35,14 +34,13 @@ const LoginComponent = () => {
       newErrors.email = "Please enter an email";
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email))
       newErrors.email = "Invalid email address";
-    if (!password || password === "")
-      newErrors.password = "";
+    if (!password || password === "") newErrors.password = "";
     return newErrors;
   };
 
   const changeLogin = useUserToggleContext();
 
-  const handleSubmit = (form, {setSubmitting, resetForm}) => {
+  const handleSubmit = (form, { setSubmitting, resetForm }) => {
     setSubmitting(true);
     const newErrors = {};
     const formErrors = validateForm(form);
@@ -55,11 +53,10 @@ const LoginComponent = () => {
         .post(API_URL, form)
         .then((res) => {
           setSubmitting(false);
-          
+          localStorage.setItem("id", res.data.id_user);
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("user", JSON.stringify(res.data.username));
           localStorage.setItem("isAdmin", res.data.admin);
-          localStorage.setItem("id", JSON.stringify(res.data.id_user));
           changeLogin(res.data.username, res.data.admin);
           if (res.data.admin) {
             navigate("/admin");
@@ -69,7 +66,7 @@ const LoginComponent = () => {
         })
         .catch((err) => {
           resetForm();
-          console.log("catch",err);
+          console.log("catch", err);
           newErrors.noLogin = "Invalid email or password";
           setErrors(newErrors);
         });
@@ -98,10 +95,7 @@ const LoginComponent = () => {
               <p className="text-black-50 mb-5">
                 Please enter your email and password
               </p>
-              <Formik
-                initialValues={initialFormState}
-                onSubmit={handleSubmit}
-              >
+              <Formik initialValues={initialFormState} onSubmit={handleSubmit}>
                 {({
                   values,
                   errors,
@@ -161,10 +155,7 @@ const LoginComponent = () => {
                       }
                     />
                     <div className="text-center">
-                      <MDBBtn
-                        disabled={isSubmitting}
-                        type="submit"
-                      >
+                      <MDBBtn disabled={isSubmitting} type="submit">
                         Login
                       </MDBBtn>
                     </div>
