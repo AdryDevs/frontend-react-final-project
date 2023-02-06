@@ -9,7 +9,7 @@ This app is made for any business (in this case a restaurant) in order to make r
 
 **Server:** NodeJS, ExpressJS
 
-**Deploys:** frontend AWS backend Railway
+**Deploys:** frontend AWS(https://master.d3u8gfug9jv5jo.amplifyapp.com/) backend Railway
 
 
 ## Installation
