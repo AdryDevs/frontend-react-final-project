@@ -1,70 +1,70 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Bookings Manager
+This app is made for any business (in this case a restaurant) in order to make reservations for users and to manage all of them as an Administrator.
 
-## Available Scripts
 
-In the project directory, you can run:
+## Tech Stack
 
-### `npm start`
+**Client:** React, Redux, SCSS, Javascript
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+**Server:** NodeJS, ExpressJS
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+**Deploys:** frontend AWS backend Railway
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Installation
 
-### `npm run build`
+clone the repository on your vscode (only the front, the back is deployed:
+type: "git clone https://github.com/AdryDevs/frontend-react-final-project.git" on your console
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Once cloned, install all modules by typing : "npm install" on your console.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+start the app by typing: "npm start" on your console.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+After a few seconds the app should now be working and displayed on your default browser.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+    
+## Authors
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- [@AdryDevs](https://github.com/AdryDevs)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## API References
 
-## Learn More
+#### Register
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+http://localhost:3000/user/register
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### Login
 
-### Code Splitting
+http://localhost:3000/user/login
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+#### Create new booking
 
-### Analyzing the Bundle Size
+http://localhost:3000/booking/new
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+#### Get all bookings (admin only)
 
-### Making a Progressive Web App
+http://localhost:3000/booking/
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+#### Get all user's bookings
 
-### Advanced Configuration
+http://localhost:3000/booking/:id
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+#### Get all users (admin only)
 
-### Deployment
+http://localhost:3000/user/admin/all
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+#### Delete booking
 
-### `npm run build` fails to minify
+http://localhost:3000/booking/:id
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+
+
+
+
+
