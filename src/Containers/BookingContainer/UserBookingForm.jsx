@@ -21,6 +21,7 @@ const UserForm = () => {
     onSubmit: (values) => {
         axios.post(API_URL, values)
             .then((response) => {
+              response.json();
                 console.log("response");
                 if (response) {
                     navigate("/booking/");
