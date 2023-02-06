@@ -15,6 +15,7 @@ import AdminUsers from './Containers/AdminContainer/AdminUsersContainer';
 import AdminBooking from './Containers/AdminContainer/AdminBookingContainer';
 import User from './Containers/UserContainer/UserContainer';
 import UserBooking from './Components/UserBookingComponent/UserBookingComponent';
+import UserForm from './Containers/BookingContainer/UserBookingForm';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
             <Route path="/admin/bookings" element={<AdminBooking />} />
             <Route path="/user" element={<User />} />
             <Route path="/user/bookings" element={<UserBooking />} />
+            <Route path="/user/form" element={<UserForm />} />
 
           </Routes>
         </BrowserRouter>

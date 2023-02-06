@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../Admin/AdminBooking.scss'
 import UserBookingName from '../UserNameComponent/UserNameComponent';
+import NewUserBooking from './UserNewBooking';
+
 
 const UserBooking = () => {
     const id = localStorage.getItem('id');
     const API_URL = 'http://localhost:3000/booking/'+ id;
     const [bookings, setBookings] = useState([]);
+    
 
 
 
@@ -30,7 +33,7 @@ const UserBooking = () => {
         })
 
             .then(res => {
-                console.log(res.data);
+                setBookings(res.data);
             })
 
             .catch(err => {
@@ -43,6 +46,7 @@ const UserBooking = () => {
     return (
         <div className='table'>
             <UserBookingName />
+            <NewUserBooking />
             <table className="table">
                 <thead>
                     <tr>
@@ -69,7 +73,7 @@ const UserBooking = () => {
                     ))}
                 </tbody>
             </table>
-        </div>
+        </div>    
     );
 };
 
